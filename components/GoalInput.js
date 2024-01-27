@@ -2,17 +2,19 @@ import React, { View, TextInput, Button, StyleSheet, Modal, Image } from 'react-
 import { useState } from 'react';
 
 function GoalInput(props) {
-    const [enteredGoalText, setEnteredGoalTet] = useState('');
+    const [enteredGoalText, setEnteredGoalText] = useState('');
 
     function goalInputHandler(enteredText) {
-        setEnteredGoalTet(enteredText);
+        setEnteredGoalText(enteredText);
     }
 
     function addGoalHandler() {
+        if (enteredGoalText.trim().length === 0) {
+             // エラー処理
+        }
         props.onAddGoal(enteredGoalText);
-        setEnteredGoalTet('');
+        setEnteredGoalText('');
     }
-
     return (
         <Modal visible={props.visible} animationType='slide'>
             <View style={styles.inputContainer}>
@@ -25,10 +27,10 @@ function GoalInput(props) {
                 />
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
-                        <Button title="ADD GOAL" onPress={addGoalHandler} />
+                        <Button title="CANCEL" onPress={props.onCancel} color='#f31282' />
                     </View>
                     <View style={styles.button}>
-                        <Button title="CANCEL" onPress={props.onCancel} />
+                        <Button title="ADD GOAL" onPress={addGoalHandler} color='#b180f0'/>
                     </View>
                 </View>
             </View>
@@ -47,10 +49,12 @@ const styles = StyleSheet.create({
     },
     textInput: {
     width: '100%',
-    borderColor: '#cccccc',
+        borderColor: '#e4d0ff',
+        backgroundColor: '#e4d0ff',
+        color: '#120438',
+    borderRadius:6,
     borderWidth: 1,
-    padding: 10,
-    padding: 8
+    padding: 16, // パディングの重複修正
     },
     image: {
         width: 200,
