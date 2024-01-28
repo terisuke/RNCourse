@@ -1,4 +1,4 @@
-import React, { View, TextInput, Button, StyleSheet, Modal, Image } from 'react-native';
+import React, { View, TextInput, Button, StyleSheet, Modal, Image ,Alert} from 'react-native';
 import { useState } from 'react';
 
 function GoalInput(props) {
@@ -10,7 +10,8 @@ function GoalInput(props) {
 
     function addGoalHandler() {
         if (enteredGoalText.trim().length === 0) {
-             // エラー処理
+            Alert.alert('Error', 'Please enter a goal', [{ text: 'OK', style: 'destructive' }]);
+            return;
         }
         props.onAddGoal(enteredGoalText);
         setEnteredGoalText('');
